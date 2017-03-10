@@ -6,7 +6,7 @@
   "version": "0.0.1",
 
   "browser_action": {
-    "default_icon": "pencil.png",
+    "default_icon": "Frame.png",
     "default_popup": "popup.html"
   },
   "options_page": "options.html",
