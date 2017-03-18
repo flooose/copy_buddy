@@ -24,7 +24,10 @@ function saveElementToCopyElements(text) {
         } else {
             copyElements = storage.copyElements;
         }
-        copyElements.push(text);
+
+        if(text.length != 0) {
+            copyElements.push(text);
+        }
 
         chrome.storage.local.set({
             copyElements: copyElements
