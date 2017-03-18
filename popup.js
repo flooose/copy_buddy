@@ -15,7 +15,8 @@
 function setStorage(callback){
     chrome.storage.local.get(null, callback);
 }
-function saveElementToCopyElements(element) {
+
+function saveElementToCopyElements(text) {
     let copyElements;
     setStorage(function(storage) {
         if (!storage.copyElements){
@@ -23,12 +24,12 @@ function saveElementToCopyElements(element) {
         } else {
             copyElements = storage.copyElements;
         }
-        copyElements.push(element);
+        copyElements.push(text);
 
         chrome.storage.local.set({
             copyElements: copyElements
         }, function() {
-            createElementWithText(element, copyElements.length - 1);
+            createElementWithText(text, copyElements.length - 1);
         }.bind(this));
     });
 }
@@ -36,7 +37,12 @@ function saveElementToCopyElements(element) {
 function updateElement(text, id, element) {
     setStorage(function(storage) {
         let index = parseInt(id);
-        storage.copyElements[index] = text;
+
+        if(text.length == 0) {
+            storage.copyElements.splice(index, 1);
+        } else {
+            storage.copyElements[index] = text;
+        }
 
         let myElement = element;
 
