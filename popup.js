@@ -69,7 +69,7 @@ function updateElement(text, id, element) {
         chrome.storage.local.set({
             copyElements: storage.copyElements
         }, function() {
-            myElement.textContent = text;
+            setElementContent(myElement, text);
         });
     });
 }
@@ -84,7 +84,7 @@ function saveElementToCopyElements(text) {
         }
 
         if(text.length != 0) {
-            copyElements.push(text);
+            copyElements.push(htmlifyText(text));
         }
 
         chrome.storage.local.set({
@@ -104,7 +104,7 @@ function createElementWithText(text, id) {
     let newDiv = document.createElement("div");
     let newP = document.createElement("p");
 
-    newP.textContent = text;
+    setElementContent(newP, text);
     newP.setAttribute("id", id);
     newP.setAttribute("class", "copy-item");
     newDiv.appendChild(newP);
@@ -139,6 +139,14 @@ function createElementWithText(text, id) {
         target.setAttribute("style", "display: none");
 
     }.bind(this));
+}
+
+function setElementContent(element, text) {
+    element.innerHTML = htmlifyText(text);
+}
+
+function htmlifyText(text){
+    return text.replace(/(?:\r\n|\r|\n)/g, "<br \/>");
 }
 
 function setStatus(text) {
