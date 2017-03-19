@@ -70,11 +70,6 @@ function createElementWithText(text, id) {
     newDiv.appendChild(newP);
     container.appendChild(newDiv);
 
-    var status = document.getElementById("status");
-     status.textContent = "Options saved.";
-    setTimeout(function() {
-        status.textContent = "";
-    }, 750);
     newP.addEventListener("click", function(event) {
         var range = document.createRange();
         range.selectNode(event.target);
@@ -102,13 +97,7 @@ function createElementWithText(text, id) {
 
 function startApp(){
     let input = document.getElementById("copy-input");
-    chrome.storage.local.get(null, function(storage) {
-        if (storage.copyElements){
-            storage.copyElements.forEach(function(text, index){
-                createElementWithText(text, index);
-            });
-        }
-    });
+    let usageMessage = "Click to copy, double-click to edit";
 
     input.addEventListener("keypress", function(event){
         if (event.keyCode === 13) {
@@ -124,13 +113,30 @@ function startApp(){
                 this.value="";
             } else {
                 saveElementToCopyElements(this.value);
-                //element.setAttribute('style', "display: block");
                 this.value="";
             }
         }
     });
+    input.addEventListener("focus", function(){
+        setStatus("Enter to Save, Shift-Enter for new line");
+    });
+    input.addEventListener("blur", function(){
+        setStatus(usageMessage);
+    });
 
+    chrome.storage.local.get(null, function(storage) {
+        if (storage.copyElements && storage.copyElements.length != 0){
+            setStatus(usageMessage);
+            storage.copyElements.forEach(function(text, index){
+                createElementWithText(text, index);
+            });
+        }
+    });
 }
 
+function setStatus(text) {
+    let status = document.getElementById("status");
+    status.textContent = text;
+}
 
 document.addEventListener("DOMContentLoaded", startApp);
