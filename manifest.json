@@ -1,19 +1,25 @@
 {
-  "manifest_version": 2,
+    "manifest_version": 2,
 
-  "name": "Data Trove",
-  "description": "This extension helps you to fill out data in a form",
-  "version": "0.0.1",
+    "name": "Data Trove",
+    "description": "This extension helps you to fill out data in a form",
+    "version": "0.0.1",
 
-  "browser_action": {
-    "default_icon": "Frame.png",
-    "default_popup": "popup.html"
-  },
-  "options_page": "options.html",
-  "permissions": [
-    "activeTab",
-    "clipboardWrite",
-    "storage",
-    "https://ajax.googleapis.com/"
-  ]
+    "default_locale": "en",
+    "description": "A place to store things that you want to paste later",
+
+    "icons": {},
+    "author": "christopher floess",
+
+    "browser_action": {
+        "default_icon": "Frame.png",
+        "default_popup": "popup.html"
+    },
+    "options_page": "options.html",
+    "permissions": [
+        "activeTab",
+        "clipboardWrite",
+        "storage",
+        "https://ajax.googleapis.com/"
+    ]
 }
