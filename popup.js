@@ -53,12 +53,13 @@ function updateElement(text, id, element) {
             copyElements: storage.copyElements
         }, function() {
             myElement.textContent = text;
-            chrome.storage.local.get(null, function (result) {
-                console.log("blub",result);
-            });
         });
-    }.bind(this));
+    });
 }
+
+var timer = 0;
+var delay = 200;
+var prevent = false;
 
 function createElementWithText(text, id) {
     let container = document.getElementById("container");
@@ -71,22 +72,29 @@ function createElementWithText(text, id) {
     container.appendChild(newDiv);
 
     newP.addEventListener("click", function(event) {
-        var range = document.createRange();
-        range.selectNode(event.target);
-        window.getSelection().addRange(range);
+        timer = setTimeout(function() {
+            if (!prevent) {
+                var range = document.createRange();
+                range.selectNode(event.target);
+                window.getSelection().addRange(range);
+                try {
+                    var successful = document.execCommand("copy");
+                    var msg = successful ? "successful" : "unsuccessful";
+                    setStatus("\"" + newP.textContent + "\" copied to clipboard");
+                    setTimeout(window.close, 500);
+                } catch(err) {
+                    console.log("Oops, unable to cut");
+                }
+            }
+            prevent = false;
+        }, delay);
 
-        try {
-            var successful = document.execCommand("copy");
-            var msg = successful ? "successful" : "unsuccessful";
-            console.log("Cutting text command was " + msg);
-        } catch(err) {
-            console.log("Oops, unable to cut");
-        }
     });
     newP.addEventListener("dblclick", function(event) {
+        clearTimeout(timer);
+        prevent = true;
         let input = document.getElementById("copy-input");
         let target = event.target;
-
         input.value = target.textContent;
         input.focus();
         input.setAttribute("data-for", target.id);
