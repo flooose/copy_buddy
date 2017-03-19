@@ -96,7 +96,7 @@ function saveElementToCopyElements(text) {
 }
 
 var timer = 0;
-var delay = 200;
+var delay = 300;
 var prevent = false;
 
 function createElementWithText(text, id) {
@@ -106,6 +106,7 @@ function createElementWithText(text, id) {
 
     newP.textContent = text;
     newP.setAttribute("id", id);
+    newP.setAttribute("class", "copy-item");
     newDiv.appendChild(newP);
     container.appendChild(newDiv);
 
@@ -118,7 +119,7 @@ function createElementWithText(text, id) {
                 try {
                     document.execCommand("copy");
                     setStatus("\"" + newP.textContent + "\" copied to clipboard");
-                    setTimeout(window.close, 500);
+                    setTimeout(window.close, 750);
                 } catch(err) {
                     console.log("Oops, unable to cut");
                 }
@@ -139,7 +140,6 @@ function createElementWithText(text, id) {
 
     }.bind(this));
 }
-
 
 function setStatus(text) {
     let status = document.getElementById("status");
