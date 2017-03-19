@@ -12,96 +12,8 @@
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *   GNU General Public License for more details.
  */
-function setStorage(callback){
-    chrome.storage.local.get(null, callback);
-}
 
-function saveElementToCopyElements(text) {
-    let copyElements;
-    setStorage(function(storage) {
-        if (!storage.copyElements){
-            copyElements = [];
-        } else {
-            copyElements = storage.copyElements;
-        }
-
-        if(text.length != 0) {
-            copyElements.push(text);
-        }
-
-        chrome.storage.local.set({
-            copyElements: copyElements
-        }, function() {
-            createElementWithText(text, copyElements.length - 1);
-        }.bind(this));
-    });
-}
-
-function updateElement(text, id, element) {
-    setStorage(function(storage) {
-        let index = parseInt(id);
-
-        if(text.length == 0) {
-            storage.copyElements.splice(index, 1);
-        } else {
-            storage.copyElements[index] = text;
-        }
-
-        let myElement = element;
-
-        chrome.storage.local.set({
-            copyElements: storage.copyElements
-        }, function() {
-            myElement.textContent = text;
-        });
-    });
-}
-
-var timer = 0;
-var delay = 200;
-var prevent = false;
-
-function createElementWithText(text, id) {
-    let container = document.getElementById("container");
-    let newDiv = document.createElement("div");
-    let newP = document.createElement("p");
-
-    newP.textContent = text;
-    newP.setAttribute("id", id);
-    newDiv.appendChild(newP);
-    container.appendChild(newDiv);
-
-    newP.addEventListener("click", function(event) {
-        timer = setTimeout(function() {
-            if (!prevent) {
-                var range = document.createRange();
-                range.selectNode(event.target);
-                window.getSelection().addRange(range);
-                try {
-                    var successful = document.execCommand("copy");
-                    var msg = successful ? "successful" : "unsuccessful";
-                    setStatus("\"" + newP.textContent + "\" copied to clipboard");
-                    setTimeout(window.close, 500);
-                } catch(err) {
-                    console.log("Oops, unable to cut");
-                }
-            }
-            prevent = false;
-        }, delay);
-
-    });
-    newP.addEventListener("dblclick", function(event) {
-        clearTimeout(timer);
-        prevent = true;
-        let input = document.getElementById("copy-input");
-        let target = event.target;
-        input.value = target.textContent;
-        input.focus();
-        input.setAttribute("data-for", target.id);
-        target.setAttribute("style", "display: none");
-
-    }.bind(this));
-}
+document.addEventListener("DOMContentLoaded", startApp);
 
 function startApp(){
     let input = document.getElementById("copy-input");
@@ -142,9 +54,94 @@ function startApp(){
     });
 }
 
+function updateElement(text, id, element) {
+    chrome.storage.local.get(null, function(storage) {
+        let index = parseInt(id);
+
+        if(text.length == 0) {
+            storage.copyElements.splice(index, 1);
+        } else {
+            storage.copyElements[index] = text;
+        }
+
+        let myElement = element;
+
+        chrome.storage.local.set({
+            copyElements: storage.copyElements
+        }, function() {
+            myElement.textContent = text;
+        });
+    });
+}
+
+function saveElementToCopyElements(text) {
+    let copyElements;
+    chrome.storage.local.get(null, function(storage) {
+        if (!storage.copyElements){
+            copyElements = [];
+        } else {
+            copyElements = storage.copyElements;
+        }
+
+        if(text.length != 0) {
+            copyElements.push(text);
+        }
+
+        chrome.storage.local.set({
+            copyElements: copyElements
+        }, function() {
+            createElementWithText(text, copyElements.length - 1);
+        }.bind(this));
+    });
+}
+
+var timer = 0;
+var delay = 200;
+var prevent = false;
+
+function createElementWithText(text, id) {
+    let container = document.getElementById("container");
+    let newDiv = document.createElement("div");
+    let newP = document.createElement("p");
+
+    newP.textContent = text;
+    newP.setAttribute("id", id);
+    newDiv.appendChild(newP);
+    container.appendChild(newDiv);
+
+    newP.addEventListener("click", function(event) {
+        timer = setTimeout(function() {
+            if (!prevent) {
+                var range = document.createRange();
+                range.selectNode(event.target);
+                window.getSelection().addRange(range);
+                try {
+                    document.execCommand("copy");
+                    setStatus("\"" + newP.textContent + "\" copied to clipboard");
+                    setTimeout(window.close, 500);
+                } catch(err) {
+                    console.log("Oops, unable to cut");
+                }
+            }
+            prevent = false;
+        }, delay);
+
+    });
+    newP.addEventListener("dblclick", function(event) {
+        clearTimeout(timer);
+        prevent = true;
+        let input = document.getElementById("copy-input");
+        let target = event.target;
+        input.value = target.textContent;
+        input.focus();
+        input.setAttribute("data-for", target.id);
+        target.setAttribute("style", "display: none");
+
+    }.bind(this));
+}
+
+
 function setStatus(text) {
     let status = document.getElementById("status");
     status.textContent = text;
 }
-
-document.addEventListener("DOMContentLoaded", startApp);
