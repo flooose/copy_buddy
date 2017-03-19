@@ -1,19 +1,23 @@
 {
-  "manifest_version": 2,
+    "manifest_version": 2,
 
-  "name": "Data Trove",
-  "description": "This extension helps you to fill out data in a form",
-  "version": "0.0.1",
+    "name": "Paste Later",
+    "description": "This extension helps you to fill out data in a form",
+    "version": "0.1.0",
 
-  "browser_action": {
-    "default_icon": "Frame.png",
-    "default_popup": "popup.html"
-  },
-  "options_page": "options.html",
-  "permissions": [
-    "activeTab",
-    "clipboardWrite",
-    "storage",
-    "https://ajax.googleapis.com/"
-  ]
+    "description": "A place to store things that you want to copy/paste later",
+
+    "icons": {},
+    "author": "christopher floess",
+
+    "browser_action": {
+        "default_icon": "Frame.png",
+        "default_popup": "popup.html"
+    },
+    "permissions": [
+        "activeTab",
+        "clipboardWrite",
+        "storage",
+        "https://ajax.googleapis.com/"
+    ]
 }

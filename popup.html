@@ -25,14 +25,17 @@
       -
       - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
      -->
+    <link rel="stylesheet" type="text/css" href="popup.css">
     <script src="popup.js"></script>
   </head>
   <body>
-    <div type="text" id="type0"></div>
-    <div type="text" id="type1"></div>
-    <div type="text" id="type2"></div>
-    <div type="text" id="type3"></div>
 
-    <img id="image-result" hidden>
+    <textarea id="copy-input" type="text" rows="1"></textarea>
+
+    <div id="container">
+    </div>
+
+    <div id="status"></div>
+
   </body>
 </html>
