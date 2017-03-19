@@ -1,12 +1,11 @@
 {
     "manifest_version": 2,
 
-    "name": "Data Trove",
+    "name": "Paste Later",
     "description": "This extension helps you to fill out data in a form",
-    "version": "0.0.1",
+    "version": "0.1.0",
 
-    "default_locale": "en",
-    "description": "A place to store things that you want to paste later",
+    "description": "A place to store things that you want to copy/paste later",
 
     "icons": {},
     "author": "christopher floess",
