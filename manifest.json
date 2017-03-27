@@ -1,8 +1,7 @@
 {
     "manifest_version": 2,
 
-    "name": "Paste Later",
-    "description": "This extension helps you to fill out data in a form",
+    "name": "Copy Buddy",
     "version": "0.1.0",
 
     "description": "A place to store things that you want to copy/paste later",
@@ -11,7 +10,7 @@
     "author": "christopher floess",
 
     "browser_action": {
-        "default_icon": "Frame.png",
+        "default_icon": "copy-buddy.png",
         "default_popup": "popup.html"
     },
     "permissions": [

@@ -1,3 +1,7 @@
 .copy-item {
   font-style: italic;
 }
+
+textarea {
+  width: 98%;
+}
