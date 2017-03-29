@@ -6,11 +6,13 @@
 
     "description": "A place to store things that you want to copy/paste later",
 
-    "icons": {},
-    "author": "christopher floess",
+  "icons": { "16": "drawing-1.png",
+             "48": "drawing-1.png",
+             "128": "drawing-1.png" },
+  "author": "christopher floess",
 
-    "browser_action": {
-        "default_icon": "copy-buddy.png",
+  "browser_action": {
+        "default_icon": "drawing-1.png",
         "default_popup": "popup.html"
     },
     "permissions": [
