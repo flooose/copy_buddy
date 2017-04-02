@@ -2,15 +2,17 @@
     "manifest_version": 2,
 
     "name": "Copy Buddy",
-    "version": "0.1.1",
+    "version": "0.2.0",
 
     "description": "A place to store things that you want to copy/paste later",
 
-    "icons": {},
-    "author": "christopher floess",
+  "icons": { "16": "drawing-1.png",
+             "48": "drawing-1.png",
+             "128": "drawing-1.png" },
+  "author": "christopher floess",
 
-    "browser_action": {
-        "default_icon": "copy-buddy.png",
+  "browser_action": {
+        "default_icon": "drawing-1.png",
         "default_popup": "popup.html"
     },
     "permissions": [

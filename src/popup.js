@@ -50,6 +50,8 @@ function startApp(){
             storage.copyElements.forEach(function(text, index){
                 createElementWithText(text, index);
             });
+        } else {
+            saveElementToCopyElements("Double-click to edit");
         }
     });
 }
