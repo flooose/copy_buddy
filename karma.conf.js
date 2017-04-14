@@ -31,40 +31,57 @@ module.exports = function(config) {
     },
 
 
-    // test results reporter to use
-    // possible values: 'dots', 'progress'
-    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+      // test results reporter to use
+      // possible values: 'dots', 'progress'
+      // available reporters: https://npmjs.org/browse/keyword/karma-reporter
+      reporters: ['progress'],
 
 
-    // web server port
-    port: 9876,
+      // web server port
+      port: 9876,
 
 
-    // enable / disable colors in the output (reporters and logs)
-    colors: true,
+      // enable / disable colors in the output (reporters and logs)
+      colors: true,
 
 
-    // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
+      // level of logging
+      // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+      logLevel: config.LOG_INFO,
 
 
-    // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
+      // enable / disable watching file and executing tests whenever any file changes
+      autoWatch: true,
 
 
-    // start these browsers
-    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+      // start these browsers
+      // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+      browsers: ['Chromium'],
 
 
-    // Continuous Integration mode
-    // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
+      // Continuous Integration mode
+      // if true, Karma captures browsers, runs the tests and exits
+      singleRun: false,
 
-    // Concurrency level
-    // how many browser should be started simultaneous
-    concurrency: Infinity
-  })
+      // Concurrency level
+      // how many browser should be started simultaneous
+      concurrency: Infinity
+  });
+    var configuration = {
+        // other things
+
+        customLaunchers: {
+            Chrome_travis_ci: {
+                base: 'Chrome',
+                flags: ['--no-sandbox']
+            }
+        },
+    };
+
+    if (process.env.TRAVIS) {
+        configuration.browsers = ['Chrome_travis_ci'];
+    }
+
+    config.set(Object.assign(config, configuration));
+
 }
