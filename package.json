@@ -4,7 +4,8 @@
   "description": "A place to store things that you want to copy and paste later",
   "main": "index.js",
   "scripts": {
-    "test": "karma start --single-run"
+      "pretest": "babel src -d copy_buddy",
+      "test": "karma start --single-run"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,8 @@
   },
   "homepage": "https://github.com/flooose/copy_buddy#readme",
   "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.4.0",
     "eslint": "^3.19.0",
     "jasmine-core": "^2.5.2",
     "karma": "^1.6.0",
