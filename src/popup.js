@@ -135,12 +135,16 @@ function createElementWithText(text, id) {
         prevent = true;
         let input = document.getElementById("copy-input");
         let target = event.target;
-        input.value = target.textContent;
+        input.value = extractText(target);
         input.focus();
         input.setAttribute("data-for", target.id);
         target.setAttribute("style", "display: none");
 
     }.bind(this));
+}
+
+function extractText(element) {
+    return element.innerText;
 }
 
 function setElementContent(element, text) {
