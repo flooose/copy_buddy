@@ -2,3 +2,4 @@
 *.crx
 copy_buddy/*
 tmp/*
+node_modules

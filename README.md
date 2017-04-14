@@ -15,3 +15,11 @@ folder. After this, the "Load unpacked extension" button can be used in
 "chrome://extensions".
 
 All html, javascript and css files can be found in the `src/` folder.
+
+#### Testing
+
+We use jasmine for testing and karma to run tests. To get started, run
+
+    $ karma start karma.conf.js
+
+then write your tests.
