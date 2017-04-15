@@ -14,6 +14,7 @@ test :
 	npm test
 
 release : build
+	rm copy_buddy.zip
 	zip -r copy_buddy.zip copy_buddy/
 
 clean :
