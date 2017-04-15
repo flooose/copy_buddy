@@ -1,13 +1,17 @@
 describe("text extraction", function() {
+    var blub = "blub";
+    var newP;
+    var body;
+
     beforeAll(function() {
-        blub = "blub";
         newP = document.createElement("p");
-        newP.setAttribute('id', 'copy-input');
         newP.innerHTML = blub + "<br />" + blub;
+        body = document.getElementsByTagName('body')[0];
+        body.appendChild(newP);
     });
 
     it("extracts the text with line breaks", function() {
-        expected = blub + "\n" + blub;
+        var expected = blub + "\n" + blub;
         expect(extractText(newP)).toEqual(expected);
     })
 });
