@@ -83,6 +83,6 @@ module.exports = function(config) {
         config.set(
             Object.assign(config,
                           customLaunchers,
-                          { browsers: ['PhantomJS', 'Firefox', 'Chrome'] }));
+                          { browsers: ['PhantomJS'] }));
     }
 }
