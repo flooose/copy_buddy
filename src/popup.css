@@ -6,6 +6,14 @@ body {
   font-style: italic;
 }
 
+#container div:nth-child(odd) {
+  background: #00ff0009;
+}
+
+#status {
+  color: #777;
+}
+
 textarea {
   width: 98%;
 }
