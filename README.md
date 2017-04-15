@@ -25,3 +25,5 @@ We use jasmine for testing and karma to run tests. To get started, run
     $ karma start karma.conf.js
 
 then write your tests.
+
+See [customLaunchers](https://swizec.com/blog/how-to-run-javascript-tests-in-chrome-on-travis/swizec/6647) about test setup on Travis-Ci versus test setup on local machine.
