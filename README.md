@@ -1,5 +1,7 @@
 ## Copy Buddy
 
+[![Build Status](https://travis-ci.org/flooose/copy_buddy.svg?branch=master)](https://travis-ci.org/flooose/copy_buddy)
+
 A chrome extension for storing things you'd like to copy and paste later.
 
 The latest release can be
