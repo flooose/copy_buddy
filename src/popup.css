@@ -1,8 +1,11 @@
 body {
-  min-width: 250px;
+  width: 250px;
+  background-color: #fafafa
 }
 
 .copy-item {
+  text-overflow: ellipsis;
+  overflow: hidden;
   font-style: italic;
 }
 
@@ -12,6 +15,7 @@ body {
 
 #status {
   color: #777;
+  font-size: 80%;
 }
 
 textarea {
