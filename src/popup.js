@@ -107,6 +107,7 @@ function createElementWithText(text, id) {
     let newP = document.createElement("p");
 
     setElementContent(newP, text);
+    newP.setAttribute("title", text);
     newP.setAttribute("id", id);
     newP.setAttribute("class", "copy-item");
     newDiv.appendChild(newP);
