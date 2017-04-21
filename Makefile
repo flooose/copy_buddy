@@ -5,7 +5,7 @@ images = img/copy-buddy-128.png\
 
 source_files = src/popup.css src/manifest.json  src/popup.html
 
-build : images $(source_files)
+build : yarn images $(source_files)
 	cp $(source_files) copy_buddy/
 	babel src -d copy_buddy
 
@@ -17,6 +17,13 @@ images :
 	convert img/drawing-1.png -background transparent -resize 16x16 copy_buddy/copy-buddy-16.png
 	convert img/drawing-1.png -background transparent -resize 48x48 copy_buddy/copy-buddy-48.png
 	convert img/drawing-1.png -background transparent -resize 128x128 copy_buddy/copy-buddy-128.png
+
+yarn :
+	if ! which yarn; then printf \
+		'\nyarn missing. please do something like `npm install yarn` before invoking this command.\n'; \
+		exit 1;\
+	fi
+	yarn install
 
 release : build
 	rm copy_buddy.zip
