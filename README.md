@@ -9,14 +9,17 @@ downloaded [here](https://github.com/flooose/data_trove/releases)
 
 ### Development
 
-Before the extension can be loaded from source, all necessary files have to be
-"compiled" into the `copy_buddy` folder. This is done with the help of Gnu
-`make` and simply calling `make` or `make build` in the root folder of the
-project will load all files required by the manifest into the `copy_buddy`
-folder. After this, the "Load unpacked extension" button can be used in
-"chrome://extensions".
+Development in this project is dependent on gnu `make` and `yarn`.
 
-All html, javascript and css files can be found in the `src/` folder.
+    $ npm -g yarn # or similar
+    $ make build
+
+After the above commands, all sources will be "compiled" into the `copy_buddy`
+folder and the "Load unpacked extension" button can be used to load this
+extension [chrome://extensions](chrome://extensions)
+
+All html, javascript and css files can be found in the `src/` folder. After
+editing them, these files need to be "compiled" again with `make build`.
 
 #### Testing
 
