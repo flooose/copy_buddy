@@ -118,7 +118,11 @@ function createElementWithText(text, id) {
             if (!prevent) {
                 var range = document.createRange();
                 range.selectNode(event.target);
-                window.getSelection().addRange(range);
+
+                var selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(range);
+
                 try {
                     document.execCommand("copy");
                     setStatus("\"" + newP.textContent + "\" copied to clipboard");
