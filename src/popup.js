@@ -13,6 +13,7 @@
  *   GNU General Public License for more details.
  */
 
+var browser = typeof browser !== "undefined" ? browser : chrome;
 document.addEventListener("DOMContentLoaded", startApp);
 
 function startApp(){
@@ -44,7 +45,7 @@ function startApp(){
         setStatus(usageMessage);
     });
 
-    chrome.storage.local.get(null, function(storage) {
+    browser.storage.local.get(null, function(storage) {
         if (storage.copyElements && storage.copyElements.length != 0){
             setStatus(usageMessage);
             storage.copyElements.forEach(function(text, index){
@@ -57,7 +58,7 @@ function startApp(){
 }
 
 function updateElement(text, id, element) {
-    chrome.storage.local.get(null, function(storage) {
+    browser.storage.local.get(null, function(storage) {
         let index = parseInt(id);
 
         if(text.length == 0) {
@@ -68,7 +69,7 @@ function updateElement(text, id, element) {
 
         let myElement = element;
 
-        chrome.storage.local.set({
+        browser.storage.local.set({
             copyElements: storage.copyElements
         }, function() {
             setElementContent(myElement, text);
@@ -78,7 +79,7 @@ function updateElement(text, id, element) {
 
 function saveElementToCopyElements(text) {
     let copyElements;
-    chrome.storage.local.get(null, function(storage) {
+    browser.storage.local.get(null, function(storage) {
         if (!storage.copyElements){
             copyElements = [];
         } else {
@@ -89,7 +90,7 @@ function saveElementToCopyElements(text) {
             copyElements.push(htmlifyText(text));
         }
 
-        chrome.storage.local.set({
+        browser.storage.local.set({
             copyElements: copyElements
         }, function() {
             createElementWithText(text, copyElements.length - 1);
