@@ -25,9 +25,13 @@ yarn :
 	fi
 	yarn install
 
-release : build
-	rm copy_buddy.zip
+chrome : build
+	rm copy_buddy.zip && true
 	zip -r copy_buddy.zip copy_buddy/
+
+firefox : build
+	rm copy_buddy.zip || true
+	(cd copy_buddy && zip -r copy_buddy.zip . && mv ./copy_buddy.zip ..)
 
 clean :
 	rm copy_buddy/*
