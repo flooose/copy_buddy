@@ -2,7 +2,7 @@
     "manifest_version": 2,
 
     "name": "Copy Buddy",
-    "version": "0.3.0",
+    "version": "0.4.0",
 
     "description": "A place to store things that you want to copy and paste later",
     "icons": { "16": "copy-buddy-16.png",
