@@ -20,7 +20,7 @@ images :
 
 yarn :
 	if ! which yarn; then printf \
-		'\nyarn missing. please do something like `npm install yarn` before invoking this command.\n'; \
+		'\nyarn missing. please do something like `npm install -g yarn` before invoking this command.\n'; \
 		exit 1;\
 	fi
 	yarn install
